@@ -12,8 +12,11 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index(InstrumentRepository $instrumentRepository): Response
     {
-        $instrument = $instrumentRepository->findAll();
-        dump($instrument);
-        return $this->render('default/homepage.html.twig');
+        $instruments = $instrumentRepository->findAll();
+
+        // appel le fichier de template twig avec la methode render
+        return $this->render('default/homepage.html.twig',[
+            'instruments' => $instruments
+        ]);
     }
 }

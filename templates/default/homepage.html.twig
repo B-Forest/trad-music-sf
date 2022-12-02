@@ -2,5 +2,15 @@
 
 {% block body %}
     <h1>Accueil</h1>
+
+    {% for instrument in instruments %}
+        <ul>
+            <li>
+                {{ instrument.name }}
+            </li>
+        </ul>
+
+    {% endfor %}
 {% endblock %}
+
 
