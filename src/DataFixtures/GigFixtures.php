@@ -45,4 +45,5 @@ class GigFixtures extends Fixture implements DependentFixtureInterface
     {
         return [PubFixtures::class]; // PubFixtures::class === 'App\Fixtures\PubFixtures'
     }
+
 }
