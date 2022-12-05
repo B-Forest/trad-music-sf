@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Musicians{% endblock %}
+
+{% block body %}
+    <section class="container">
+
+        <h2>Musicians list</h2>
+
+        <div class="grid">
+
+            {% for musician in musicians %}
+                {% include 'musician/_card.html.twig' with {'musician' : musician} only %}
+            {% endfor %}
+
+        </div>
+
+    </section>
+{% endblock %}
