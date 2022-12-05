@@ -16,7 +16,6 @@ class GigFixtures extends Fixture implements DependentFixtureInterface
 
         $gig1 = new Gig();
         $gig1 ->setDateStart($today->modify('+2 day'));
-        $gig1 ->setDateEnd();
         $gig1->setPub($this->getReference('pub-oconnells'));
         $manager->persist($gig1);
 
