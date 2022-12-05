@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <section class="container">
     <h1>Accueil</h1>
 
     {% for instrument in instruments %}
@@ -9,8 +10,8 @@
                 {{ instrument.name }}
             </li>
         </ul>
-
     {% endfor %}
+    </section>
 {% endblock %}
 
 
