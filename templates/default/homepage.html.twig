@@ -2,15 +2,29 @@
 
 {% block body %}
     <section class="container">
-    <h1>Accueil</h1>
+    <h2>Available musicians</h2>
+    <div class="grid">
 
-    {% for instrument in instruments %}
-        <ul>
-            <li>
-                {{ instrument.name }}
-            </li>
-        </ul>
-    {% endfor %}
+        {% for musician in musicians %}
+            <article class="card">
+                <img src="{{ asset('uploads/' ~ musician.image) }}" alt="{{ musician.fullName}}">
+                <h3>{{ musician.firstName ~ ' ' ~ musician.lastName }}</h3>
+                <ul class="badge-list">
+                    {% for instrument in musician.instruments %}
+                    <li>
+                        <a href="#" class="badge badge-primary">
+                            {% if instrument.icon %}
+                                <i class="{{ instrument.icon }}"></i>
+                            {% endif %}
+                            {{ instrument.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </article>
+        {% endfor %}
+
+    </div>
     </section>
 {% endblock %}
 

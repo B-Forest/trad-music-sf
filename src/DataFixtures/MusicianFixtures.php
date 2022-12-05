@@ -47,7 +47,7 @@ class MusicianFixtures extends Fixture implements DependentFixtureInterface
         $gavin->setLastName('Pennycook');
         $gavin->setImage('gavin-pennycook.jpg');
         $gavin->addInstrument($this->getReference('instrument-flute'));
-        $gavin->addInstrument($this->getReference('instrument-fiddle'));
+        $gavin->addInstrument($this->getReference('instrument-guitar'));
         $gavin->setRoles(['USER_MUSICIAN']);
         $manager->persist($gavin);
         $this->addReference('musician-gavin', $gavin);

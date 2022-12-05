@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Repository\InstrumentRepository;
+use App\Repository\ManagerRepository;
+use App\Repository\MusicianRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,13 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(InstrumentRepository $instrumentRepository): Response
+    public function index(MusicianRepository $musiciansRepository): Response
     {
-        $instruments = $instrumentRepository->findAll();
+        $musicians = $musiciansRepository->findAll();
 
         // appel le fichier de template twig avec la methode render
         return $this->render('default/homepage.html.twig',[
-            'instruments' => $instruments
+            'musicians' => $musicians
         ]);
     }
 }
