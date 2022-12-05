@@ -22,14 +22,14 @@ class Musician extends User
     private ?string $image = null;
 
     #[ORM\ManyToMany(targetEntity: Instrument::class, inversedBy: 'musicians')]
-    private Collection $intruments;
+    private Collection $instruments;
 
     #[ORM\OneToMany(mappedBy: 'musician', targetEntity: Participant::class)]
     private Collection $participants;
 
     public function __construct()
     {
-        $this->intruments = new ArrayCollection();
+        $this->instruments = new ArrayCollection();
         $this->participants = new ArrayCollection();
     }
 
@@ -72,23 +72,23 @@ class Musician extends User
     /**
      * @return Collection<int, Instrument>
      */
-    public function getIntruments(): Collection
+    public function getInstruments(): Collection
     {
-        return $this->intruments;
+        return $this->instruments;
     }
 
-    public function addIntrument(Instrument $intrument): self
+    public function addInstrument(Instrument $instrument): self
     {
-        if (!$this->intruments->contains($intrument)) {
-            $this->intruments->add($intrument);
+        if (!$this->instruments->contains($instrument)) {
+            $this->instruments->add($instrument);
         }
 
         return $this;
     }
 
-    public function removeIntrument(Instrument $intrument): self
+    public function removeInstrument(Instrument $instrument): self
     {
-        $this->intruments->removeElement($intrument);
+        $this->intruments->removeElement($instrument);
 
         return $this;
     }
