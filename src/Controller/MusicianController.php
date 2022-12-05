@@ -17,4 +17,11 @@ class MusicianController extends AbstractController
             'musicians' => $musiciansRepository->findAll(),
         ]);
     }
+
+    #[Route('/musician/{id}', name: 'musician_detail')]
+    public function detail(int $id,MusicianRepository $musiciansRepository): Response
+    {
+        $musician = $musiciansRepository->find($id);
+        return $this->render("musician/detail.html.twig", ['musician' => $musician]);
+    }
 }
