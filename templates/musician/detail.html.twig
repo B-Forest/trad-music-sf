@@ -9,6 +9,17 @@
     <section class="container">
         <h1>{{ musician.fullName }}</h1>
         <img src="{{ asset('uploads/' ~ musician.image) }}" alt="{{ musician.fullName}}">
+        <h3>Futur Gig :</h3>
+        {# Liens vers les futurs concerts auxquelles le musiciens va participer #}
+        {% for participant in musician.participants %}
+            <ul>
+                <li>
+                    <a href="{{ path('gig_detail', { 'id' : participant.gig.id }) }}">{{ participant.gig.pub.name }} {{ participant.gig.dateStart|date('Y F l g:i a') }}</a>
+                </li>
+            </ul>
+        {% endfor %}
+
+
     </section>
 {% endblock %}
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Gig;
 use App\Repository\GigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +19,8 @@ class GigController extends AbstractController
     }
 
     #[Route('/gig/{id}', name: 'gig_detail')]
-    public function detail(int $id, GigRepository $gigRepository): Response
+    public function detail(Gig $gig): Response
     {
-        $gig = $gigRepository->find($id);
         return $this->render('gig/detail.html.twig', ['gig' => $gig]);
     }
 

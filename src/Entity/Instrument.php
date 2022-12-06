@@ -21,7 +21,7 @@ class Instrument
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $icon = null;
 
-    #[ORM\ManyToMany(targetEntity: Musician::class, mappedBy: 'intruments')]
+    #[ORM\ManyToMany(targetEntity: Musician::class, mappedBy: 'instruments')]
     private Collection $musicians;
 
     #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: Participant::class)]

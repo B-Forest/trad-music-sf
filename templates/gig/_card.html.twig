@@ -1,10 +1,8 @@
-{% if gig.dateStart > date('') %}
-    <article class="card">
-        <img src="{{ asset('uploads/' ~ gig.pub.image) }}" alt="{{ gig.pub.name }}">
-        <h3>{{ gig.pub.name}}</h3>
-        <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
-            {{ gig.dateStart|date('l jS \\o\\f F  \\a\\t g:i a')}}
-        </time>
-        <a href="{{ path('gig_detail', { 'id' : gig.id }) }}" class="btn btn-primary">See more</a>
-    </article>
-{% endif %}
+<article class="card">
+    <img src="{{ asset('uploads/' ~ gig.pub.image) }}" alt="{{ gig.pub.name }}">
+    <h3>{{ gig.pub.name }}</h3>
+    <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
+        {{ gig.dateStart|date('l jS \\o\\f F  \\a\\t g:i a') }}
+    </time>
+    <a href="{{ path('gig_detail', { 'id' : gig.id }) }}" class="btn btn-primary">See more</a>
+</article>

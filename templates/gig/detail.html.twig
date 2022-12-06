@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ gig.pub.name }}
+    {{ gig.pub.name }} {{ gig.dateStart|date('Y-m-d') }}
 {% endblock %}
 
 
@@ -21,7 +21,10 @@
                 <li>
                     {{ participant.instrument.name }} :
                     {% if participant.musician %}
-                        {{ participant.musician.fullName }}
+                        {# un lien pour pouvoir aller depuis la âge détail gig sur la page détail musician #}
+                        <a href="{{ path('musician_detail', {'id': participant.musician.id}) }}">{{ participant.musician.fullName }}</a>
+                    {% else%}
+                        Aucun participant
                     {% endif %}
                 </li>
             </ul>
