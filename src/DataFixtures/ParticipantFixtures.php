@@ -23,8 +23,9 @@ class ParticipantFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($participant2);
 
         $participant3 = new Participant();
-        $participant3->setGig($this->getReference('gig-2'));
+        $participant3->setGig($this->getReference('gig-3'));
         $participant3->setInstrument($this->getReference('instrument-guitar'));
+        $participant3->setMusician($this->getReference('musician-sean'));
         $manager->persist($participant3);
 
         $manager->flush();

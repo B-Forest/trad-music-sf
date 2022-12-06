@@ -16,7 +16,7 @@ class DefaultController extends AbstractController
     public function index(MusicianRepository $musiciansRepository, GigRepository $gigRepository): Response
     {
         $musicians = $musiciansRepository->findAll();
-        $gigs = $gigRepository->findAll();
+        $gigs = $gigRepository->findFutureGig();
 
         // appel le fichier de template twig avec la methode render
         return $this->render('default/homepage.html.twig',[

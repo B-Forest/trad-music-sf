@@ -5,9 +5,7 @@
        <h2>Next Gig in Town</h2> 
         <div class="grid">
             {% for gig in gigs %}
-                {% if gig.dateStart > date('') %}
                     {% include'gig/_card.html.twig' with {'gig' : gig} only %}
-                {% endif %}
             {% endfor %}
         </div>
     </section>
