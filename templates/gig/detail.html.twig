@@ -9,9 +9,12 @@
     <section class="container">
         <h1>{{ gig.pub.name }}</h1>
         <img src="{{ asset('uploads/' ~ gig.pub.image) }}" alt="{{gig.pub.name}}">
-        <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
+        <h3>Where and When :</h3>
+            <p>{{ gig.pub.address ~ ' at ' ~ gig.pub.city ~ ' ' ~ gig.pub.zipCode }}</p>
+            <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
             {{ gig.dateStart|date('l jS \\o\\f F  \\a\\t g:i a')}}
-        </time>
+            </time>
+
         <h2>Partipants :</h2>
         {% for participant in gig.participants %}
             <ul>
