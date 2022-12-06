@@ -10,18 +10,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class MusicianController extends AbstractController
 {
     #[Route('/musician', name: 'musician_list')]
-    public function list(MusicianRepository $musiciansRepository): Response
+    public function list(MusicianRepository $musicianRepository): Response
     {
 
         return $this->render('musician/index.html.twig', [
-            'musicians' => $musiciansRepository->findAll(),
+            'musicians' => $musicianRepository->findAll(),
         ]);
     }
 
     #[Route('/musician/{id}', name: 'musician_detail')]
-    public function detail(int $id,MusicianRepository $musiciansRepository): Response
+    public function detail(int $id,MusicianRepository $musicianRepository): Response
     {
-        $musician = $musiciansRepository->find($id);
+        $musician = $musicianRepository->find($id);
         return $this->render("musician/detail.html.twig", ['musician' => $musician]);
     }
 }

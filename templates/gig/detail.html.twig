@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ gig.pub.name }}
+{% endblock %}
+
+
+{% block body %}
+    <section class="container">
+        <h1>{{ gig.pub.name }}</h1>
+        <img src="{{ asset('uploads/' ~ gig.pub.image) }}" alt="{{gig.pub.name}}">
+        <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
+            {{ gig.dateStart|date('l jS \\o\\f F  \\a\\t g:i a')}}
+        </time>
+        <h2>Partipant :</h2>
+        {% for participant in gig.participants %}
+            <ul>
+                <li>
+                    {{ participant.instrument.name }} :
+                    {% if participant.musician %}
+                        {{ participant.musician.fullName }}
+                    {% endif %}
+                </li>
+            </ul>
+        {% endfor %}
+
+    </section>
+{% endblock %}

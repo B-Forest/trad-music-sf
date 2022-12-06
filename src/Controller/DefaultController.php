@@ -24,4 +24,6 @@ class DefaultController extends AbstractController
             'gigs' => $gigs,
         ]);
     }
+
+
 }
