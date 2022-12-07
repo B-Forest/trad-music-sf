@@ -88,7 +88,7 @@ class Musician extends User
 
     public function removeInstrument(Instrument $instrument): self
     {
-        $this->intruments->removeElement($instrument);
+        $this->instruments->removeElement($instrument);
 
         return $this;
     }

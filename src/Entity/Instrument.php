@@ -74,7 +74,7 @@ class Instrument
     {
         if (!$this->musicians->contains($musician)) {
             $this->musicians->add($musician);
-            $musician->addIntrument($this);
+            $musician->addInstrument($this);
         }
 
         return $this;
@@ -83,7 +83,7 @@ class Instrument
     public function removeMusician(Musician $musician): self
     {
         if ($this->musicians->removeElement($musician)) {
-            $musician->removeIntrument($this);
+            $musician->removeInstrument($this);
         }
 
         return $this;
