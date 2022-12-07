@@ -31,15 +31,15 @@
 
             </ul>
             <ul>
-                {% if user %}
+                {% if app.user %}
                     <li>
-                        <a href="#">
+                        <a href="{{ path('app_logout') }}">
                             Logout
                         </a>
-                        {{ user.email }}
+                        {{ app.user.fullName }}
                     </li>
                 {%else%}
-                     <li><a href="{{ path('register') }}">Register</a></li>
+                     <li><a href="{{ path('app_register') }}">Register</a></li>
                      <li><a href="{{ path('login') }}">Login</a></li>
                 {% endif %}
             </ul>
