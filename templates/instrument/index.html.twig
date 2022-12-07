@@ -11,11 +11,16 @@
         <div class="grid">
 
             {% for instrument in instruments %}
-                <ul>
-                    <li>
+            <ul>
+                <li>
+                    <a href="{{ path('instrument_detail', { 'id' : instrument.id }) }}" class="badge badge-primary">
+                        {% if instrument.icon %}
+                            <i class="{{ instrument.icon }}"></i>
+                        {% endif %}
                         {{ instrument.name }}
-                    </li>
-                </ul>
+                    </a>
+                </li>
+            </ul>
             {% endfor %}
         </div>
         

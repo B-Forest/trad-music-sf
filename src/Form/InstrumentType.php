@@ -13,7 +13,11 @@ class InstrumentType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('icon')
+            ->add('icon', null, [ // null permet de laisser Symfony deviner le type de champ de formulaire à afficher
+                'label' => 'Class Font Awesome',
+                'help' => 'Font awesome class name',
+                // 'required' => true
+                ])
 
         ;
     }

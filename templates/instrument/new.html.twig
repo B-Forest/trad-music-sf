@@ -4,9 +4,20 @@
 
 {% block body %}
     <section class="container">
-        {{ form(form) }}
-        
-        
+
+        <h1>Add a new instrument</h1>
+
+        {# Générer la balise <form> #}
+        {{ form_start(form) }}
+
+            {# Génére l'ensemble des champs du formulaire #}
+            {{ form_widget(form) }}
+
+            <button type="submit">Create</button>
+
+        {# Générer la balise </form> #}
+        {{ form_end(form) }}
+
         <h3>Return to Instrument's list</h3>
         <a href="{{ path('instrument_list') }}">Go back to instrument's list</a>
     </section>
