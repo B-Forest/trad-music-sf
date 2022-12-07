@@ -49,4 +49,5 @@ class Manager extends User
 
         return $this;
     }
+
 }

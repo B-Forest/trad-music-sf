@@ -23,9 +23,10 @@
             </ul>
             {% endfor %}
         </div>
-        
-        <h2> Add an instrument</h2>
+        {% if is_granted('ROLE_ADMIN') %}
+            <h2> Add an instrument</h2>
 
-        <a href="{{ path('instrument_new') }}">Add a new instrument</a>
+            <a href="{{ path('instrument_new') }}">Add a new instrument</a>
+        {% endif %}
     </section>
 {% endblock %}
