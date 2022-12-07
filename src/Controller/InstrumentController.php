@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Instrument;
 use App\Form\InstrumentType;
+use App\Repository\InstrumentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +22,14 @@ class InstrumentController extends AbstractController
 
         return $this->renderForm('instrument/new.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/instrument', name: 'instrument_list')]
+    public function list(InstrumentRepository $instrumentRepository): Response
+    {
+        return $this->render('instrument/index.html.twig', [
+            'instruments' => $instrumentRepository->findAll(),
         ]);
     }
 }

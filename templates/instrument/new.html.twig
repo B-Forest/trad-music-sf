@@ -5,5 +5,9 @@
 {% block body %}
     <section class="container">
         {{ form(form) }}
+        
+        
+        <h3>Return to Instrument's list</h3>
+        <a href="{{ path('instrument_list') }}">Go back to instrument's list</a>
     </section>
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Instruments{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h2>Instruments list</h2>
+
+        <div class="grid">
+
+            {% for instrument in instruments %}
+                <ul>
+                    <li>
+                        {{ instrument.name }}
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+        
+        <h2> Add an instrument</h2>
+
+        <a href="{{ path('instrument_new') }}">Add a new instrument</a>
+    </section>
+{% endblock %}
