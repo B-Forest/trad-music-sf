@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Instrument;
 use App\Form\InstrumentType;
 use App\Repository\InstrumentRepository;
-use App\Repository\ManagerRepository;
+
+
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InstrumentController extends AbstractController
 {
     #[Route('/instrument/new', name: 'instrument_new')]
-    public function new(Request $request, ManagerReg $entityMananger): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         //créer un nouvel instrument
         $instrument = new Instrument();
@@ -27,9 +29,14 @@ class InstrumentController extends AbstractController
 
         //On vérifie si les données du formaulaire sont valides
         if ($form->isSubmitted() && $form->isValid() ){
-            //Enregistrer les données en base données
 
+            $entityManager = $doctrine->getManager();
+
+            //Enregistrer les données en base données
+             $entityManager->persist($instrument);
+             $entityManager->flush();
             //Rediriger l'internaute vers la page d'acceuil
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->renderForm('instrument/new.html.twig', [

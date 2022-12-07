@@ -9,6 +9,17 @@
     <section class="container">
         <h1>{{ musician.fullName }}</h1>
         <img src="{{ asset('uploads/' ~ musician.image) }}" alt="{{ musician.fullName}}">
+        {% for instrument in musician.instruments %}
+            <ul>
+                <a href="{{ path('instrument_detail', { 'id' : instrument.id }) }}" class="badge badge-primary">
+                    {% if instrument.icon %}
+                        <i class="{{ instrument.icon }}"></i>
+                    {% endif %}
+                    {{ instrument.name }}
+                </a>
+            </ul>
+        {% endfor %}
+
         <h3>Futur Gig :</h3>
         {# Liens vers les futurs concerts auxquelles le musiciens va participer #}
         {% for participant in musician.participants %}

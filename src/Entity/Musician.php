@@ -59,6 +59,9 @@ class Musician extends User
 
     public function getImage(): ?string
     {
+        if ($this->image === null) {
+            $this->image = 'noprofilepicture.jpg';
+        }
         return $this->image;
     }
 

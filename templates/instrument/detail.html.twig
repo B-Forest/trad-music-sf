@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ instrument.name }}
+{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <h1>Musician who play : {{ instrument.name }}</h1>
+        {% for musician in instrument.musicians %}
+            <ul>
+                <li>
+                    <a href="{{ path('musician_detail', {'id': musician.id}) }}">{{ musician.fullName }}</a>
+                </li>
+            </ul>
+        {% endfor %}
+
+    </section>
+{% endblock %}

@@ -10,6 +10,13 @@
         {# Générer la balise <form> #}
         {{ form_start(form) }}
 
+            {# Décomposer l'afffichage du formulaire #}
+            <div class="form-row">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+                {{ form_errors(form.name) }}
+            </div>
+
             {# Génére l'ensemble des champs du formulaire #}
             {{ form_widget(form) }}
 
