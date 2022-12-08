@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PubRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Pub
 {
     #[ORM\Id]
@@ -162,5 +163,11 @@ class Pub
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function prePersit(): void
+    {
+        $this->setCreatedAt(new \DateTimeImmutable());
     }
 }
