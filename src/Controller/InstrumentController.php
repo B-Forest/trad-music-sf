@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class InstrumentController extends AbstractController
 {
-    #[Route('/instrument/new', name: 'instrument_new')]
+    #[Route('/instrument/new', name: 'instrument_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -54,7 +54,7 @@ class InstrumentController extends AbstractController
         ]);
     }
 
-    #[Route('/instrument/{id}', name: 'instrument_detail', requirements: ['id' => '\d+'])]
+    #[Route('/instrument/{id}', name: 'instrument_detail', requirements: ['id' => '\d+'],methods: ['GET'])]
     public function detail(int $id,InstrumentRepository $instrumentRepository): Response
     {
         $instrument = $instrumentRepository->find($id);

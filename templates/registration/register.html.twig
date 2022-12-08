@@ -3,22 +3,38 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+    <div class="test">
     <section class="container">
-        <h1>Register</h1>
+        <h1>Register as Musician</h1>
 
-        {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstName) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.image) }}
-        {{ form_row(registrationForm.instruments) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+        {{ form_start(registrationFormMusician) }}
+        {{ form_row(registrationFormMusician.firstName) }}
+        {{ form_row(registrationFormMusician.lastName) }}
+        {{ form_row(registrationFormMusician.image) }}
+        {{ form_row(registrationFormMusician.instruments) }}
+        {{ form_row(registrationFormMusician.email) }}
+        {{ form_row(registrationFormMusician.plainPassword, {
             label: 'Password'
         }) }}
 
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_row(registrationFormMusician.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
-        {{ form_end(registrationForm) }}
+        {{ form_end(registrationFormMusician) }}
+
+        <h1>Register as Manager</h1>
+
+        {{ form_start(registrationFormManager) }}
+        {{ form_row(registrationFormManager.email) }}
+        {{ form_row(registrationFormManager.plainPassword, {
+            label: 'Password'
+        }) }}
+
+        {{ form_row(registrationFormManager.agreeTerms) }}
+
+        <button type="submit" class="btn">Register</button>
+        {{ form_end(registrationFormManager) }}
+
     </section>
+    </div>
 {% endblock %}

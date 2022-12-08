@@ -1,0 +1,9 @@
+<ul>
+    {% for instrument in instruments %}
+        <li>
+            <a href="{{ path('instrument_detail', { 'id' : instrument.id }) }}" class="badge badge-primary">
+            {{ instrument.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

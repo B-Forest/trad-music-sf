@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Manager;
 use App\Entity\Musician;
-use App\Form\RegistrationFormType;
+use App\Form\RegistrationManagerFormType;
 use App\Form\RegistrationMusicianFormType;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,20 +26,26 @@ class RegistrationController extends AbstractController
     {
         $user = new Musician();
         $user->setRoles(['ROLE_MUSICIAN']);
-        $form = $this->createForm(RegistrationMusicianFormType::class, $user);
-        $form->handleRequest($request);
+        $formMusician = $this->createForm(RegistrationMusicianFormType::class, $user);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $user = new Manager();
+        $user->setRoles(['ROLE_MANAGER']);
+        $formManager = $this->createForm(RegistrationManagerFormType::class, $user);
+
+        $formManager->handleRequest($request);
+        $formMusician->handleRequest($request);
+
+        if ($formMusician->isSubmitted() && $formMusician->isValid()) {
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $formMusician->get('plainPassword')->getData()
                 )
             );
 
             // Uploader l'image
-            $image = $form->get('image')->getData();
+            $image = $formMusician->get('image')->getData();
             if ($image) {
                 $fileName = $fileUploader->upload($image);
                 $user->setImage($fileName);
@@ -49,10 +56,23 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('homepage');
+
+        if ($formManager->isSubmitted() && $formManager->isValid()){
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $formManager->get('plainPassword')->getData()
+                )
+            );
+
+        } ;
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'registrationFormMusician' => $formMusician->createView(),
+            'registrationFormManager' => $formManager->createView()
         ]);
     }
+
+
 }
