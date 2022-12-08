@@ -43,7 +43,6 @@ class RegistrationController extends AbstractController
                     $formMusician->get('plainPassword')->getData()
                 )
             );
-
             // Uploader l'image
             $image = $formMusician->get('image')->getData();
             if ($image) {
@@ -57,6 +56,8 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('homepage');
 
+
+        }
         if ($formManager->isSubmitted() && $formManager->isValid()){
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -64,10 +65,12 @@ class RegistrationController extends AbstractController
                     $formManager->get('plainPassword')->getData()
                 )
             );
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
 
+            return $this->redirectToRoute('homepage');
         } ;
-        }
-
         return $this->render('registration/register.html.twig', [
             'registrationFormMusician' => $formMusician->createView(),
             'registrationFormManager' => $formManager->createView()

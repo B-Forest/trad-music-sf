@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pub List{% endblock %}
+
+{% block body %}
+    <section class="container">
+
+        <h2>Pubs list</h2>
+
+        <div class="grid">
+
+            {% for pub in pubs %}
+                {% include 'pub/_card.html.twig' with {'pub' : pub} only %}
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+{% endblock %}

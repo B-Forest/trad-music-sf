@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pub;
 use App\Form\PubType;
 use App\Repository\PubRepository;
+use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +23,20 @@ class PubController extends AbstractController
         ]);
     }
 
+    #[Route('/list', name: 'pub_list', methods: ['GET'])]
+    public function list(PubRepository $pubRepository): Response
+    {
+        return $this->render('pub/list.html.twig', [
+            'pubs' => $pubRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_pub_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_MANAGER')]
-    public function new(Request $request, PubRepository $pubRepository): Response
+    public function new(Request $request,
+                        PubRepository $pubRepository,
+                        FileUploader $fileUploader,
+    ): Response
     {
         $pub = new Pub();
         $pub->setManager($this->getUser());
@@ -32,6 +44,14 @@ class PubController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Uploader l'image
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $fileName = $fileUploader ->upload($image);
+                $pub->setImage($fileName);
+            }
+
             $pubRepository->save($pub, true);
 
             return $this->redirectToRoute('app_pub_index', [], Response::HTTP_SEE_OTHER);
@@ -80,4 +100,5 @@ class PubController extends AbstractController
 
         return $this->redirectToRoute('app_pub_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
