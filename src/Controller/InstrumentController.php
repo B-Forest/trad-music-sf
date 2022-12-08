@@ -64,4 +64,15 @@ class InstrumentController extends AbstractController
         }
         return $this->render("instrument/detail.html.twig", ['instrument' => $instrument]);
     }
+
+    // afficher la liste des des instruments
+    //Cette methode sera appelé en Twig avec render(controller())
+    public function listInstruments(InstrumentRepository $instrumentRepository): Response
+    {
+        $instruments = $instrumentRepository->findBy([], ['name' => 'ASC']);
+
+        return $this->render('instrument/_list.html.twig', [
+            'instruments' => $instruments
+        ]);
+    }
 }

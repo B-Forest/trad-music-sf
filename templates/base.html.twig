@@ -53,12 +53,14 @@
 </header>
 
 <main>
-    {% block body %}{% endblock %}
+    {% block body %}
+    {% endblock %}
 </main>
 
 <footer class="site-footer">
     <div class="container">
         <p>Trad Music &copy; 2022</p>
+        {{ render(controller('App\\Controller\\InstrumentController::listInstruments')) }}
     </div>
 </footer>
 </body>
