@@ -37,6 +37,9 @@ class Pub
     #[ORM\JoinColumn(nullable: false)]
     private ?Manager $manager = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
     public function __construct()
     {
         $this->gigs = new ArrayCollection();
@@ -145,6 +148,18 @@ class Pub
     public function setManager(?Manager $manager): self
     {
         $this->manager = $manager;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

@@ -1,6 +1,10 @@
 <article class="card">
     <a href="{{ path('musician_detail', {'id': musician.id}) }}">
-        <img src="{{ asset('uploads/' ~ musician.image) }}" alt="{{ musician.fullName}}">
+        {% if musician.image %}
+            <img src="{{ asset('uploads/' ~ musician.image) }}" alt="{{ musician.fullName}}">
+        {% else%}
+            <img src="{{ asset('uploads/noprofilepicture.jpg') }}" alt="{{ musician.fullName}}">
+        {% endif %}
     </a>
     <h3>{{ musician.firstName ~ ' ' ~ musician.lastName }}</h3>
     <ul class="badge-list">
