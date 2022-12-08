@@ -1,11 +1,7 @@
 <article class="card">
     <h3>{{ pub.name }}</h3>
-    <a href="#">
-        {% if pub.image %}
-            <img src="{{ asset('uploads/' ~ pub.image) }}" alt="{{ pub.name}}">
-        {% else%}
-            <img src="{{ asset('uploads/nopubpicture.jpg') }}" alt="{{ pub.name}}">
-        {% endif %}
+    <a href="{{ path('app_pub_show',{ 'id' : pub.id }) }}">
+        <img src="{{ asset('uploads/' ~ pub.image) }}" alt="{{ pub.name}}">
     </a>
     {% if pub.address %}
         <p>{{ pub.address }} at  {{ pub.city ~ ' ' ~ pub.zipcode }}</p>

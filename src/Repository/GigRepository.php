@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Gig;
+use App\Entity\Pub;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,19 +40,25 @@ class GigRepository extends ServiceEntityRepository
         }
     }
 
-    public function findFutureGig(int $limit = 4): array
+    public function findFutureGig(Pub $pub = null, int $limit = 4  ): array
     {
-        //SELECT * FROM gig WHERE date_start > NOW() ORDER BY date-start ASC LIMIT 4
-        return  $this->createQueryBuilder('gig')
-            ->addSelect('pub')
+        $qb = $this->createQueryBuilder('gig');
+
+        $qb->addSelect('pub')
             ->join('gig.pub', 'pub')
-            ->where('gig.dateStart > :today')
-            ->orderBy('gig.dateStart', 'ASC')
+            ->where('gig.dateStart > :today');
+
+        if ($pub) {
+            $qb->andWhere('pub.id = :id')
+            ->setParameter(':id', $pub->getId());
+        }
+
+        $qb->orderBy('gig.dateStart', 'ASC')
             ->setMaxResults($limit)
-            ->setParameter(':today', new \DateTime())
-            ->getQuery()
-            ->getResult()
-        ;
+            ->setParameter(':today', new \DateTime());
+
+        //SELECT * FROM gig WHERE date_start > NOW() ORDER BY date-start ASC LIMIT 4
+        return  $qb->getQuery()->getResult();
     }
 
 //    /**

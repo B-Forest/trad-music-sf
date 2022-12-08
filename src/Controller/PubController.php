@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Gig;
 use App\Entity\Pub;
 use App\Form\PubType;
+use App\Repository\GigRepository;
 use App\Repository\PubRepository;
 use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -64,10 +66,12 @@ class PubController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_pub_show', methods: ['GET'])]
-    public function show(Pub $pub): Response
+    public function show(Pub $pub, GigRepository $gig): Response
     {
         return $this->render('pub/show.html.twig', [
             'pub' => $pub,
+            'gigs'=> $gig->findFutureGig($pub),
+
         ]);
     }
 
