@@ -67,9 +67,7 @@ class Musician extends User
 
     public function setImage(?string $image): self
     {
-
         $this->image = $image;
-
         return $this;
     }
 

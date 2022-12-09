@@ -24,22 +24,23 @@ class RegistrationController extends AbstractController
         FileUploader $fileUploader
     ): Response
     {
-        $user = new Musician();
-        $user->setRoles(['ROLE_MUSICIAN']);
-        $formMusician = $this->createForm(RegistrationMusicianFormType::class, $user);
-
+        //Pourquoi avant mes $users rentrait en conflits ?
         $user = new Manager();
         $user->setRoles(['ROLE_MANAGER']);
         $formManager = $this->createForm(RegistrationManagerFormType::class, $user);
+
+        $user2 = new Musician();
+        $user2->setRoles(['ROLE_MUSICIAN']);
+        $formMusician = $this->createForm(RegistrationMusicianFormType::class, $user2);
 
         $formManager->handleRequest($request);
         $formMusician->handleRequest($request);
 
         if ($formMusician->isSubmitted() && $formMusician->isValid()) {
             // encode the plain password
-            $user->setPassword(
+            $user2->setPassword(
                 $userPasswordHasher->hashPassword(
-                    $user,
+                    $user2,
                     $formMusician->get('plainPassword')->getData()
                 )
             );
@@ -47,10 +48,10 @@ class RegistrationController extends AbstractController
             $image = $formMusician->get('image')->getData();
             if ($image) {
                 $fileName = $fileUploader->upload($image);
-                $user->setImage($fileName);
+                $user2->setImage($fileName);
             }
 
-            $entityManager->persist($user);
+            $entityManager->persist($user2);
             $entityManager->flush();
             // do anything else you need here, like send an email
 

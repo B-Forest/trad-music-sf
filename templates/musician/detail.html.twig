@@ -10,7 +10,7 @@
         <div style="display: flex; flex-direction: row; justify-content: space-between">
             <h1>{{ musician.fullName }}</h1>
             {% if musician.id == app.user.id %}
-                <a href="#">Edit Profile</a>
+                <a href="{{ path('musician_edit', {'id': musician.id}) }}">Edit Profile</a>
             {% endif %}
         </div>
         <img src="{{ asset('uploads/' ~ musician.image) }}" alt="{{ musician.fullName}}">

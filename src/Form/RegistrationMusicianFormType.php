@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -24,8 +25,13 @@ class RegistrationMusicianFormType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('image', FileType::class, [
-                'attr' => ['accept' => 'image/*']
-                ])
+                'attr' => ['accept' => 'image/*'],
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1058k',])
+                ]])
             ->add('email')
             ->add('instruments', EntityType::class, [
                 'class' => Instrument::class,

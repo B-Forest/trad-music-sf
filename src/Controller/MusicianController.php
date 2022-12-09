@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Musician;
+use App\Form\ModifyProfileMusicianType;
 use App\Form\PubType;
+use App\Form\RegistrationMusicianFormType;
 use App\Repository\MusicianRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,11 +35,11 @@ class MusicianController extends AbstractController
         return $this->render("musician/detail.html.twig", ['musician' => $musician]);
     }
 
-    #[Route('/{id}/edit', name: 'app_pub_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_MANAGER')]
+    #[Route('musician/{id}/edit', name: 'musician_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_MUSICIAN')]
     public function edit(Request $request, Musician $musician, MusicianRepository $musicianRepository): Response
     {
-        $form = $this->createForm(PubType::class, $musician);
+        $form = $this->createForm(ModifyProfileMusicianType::class, $musician);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,9 +48,9 @@ class MusicianController extends AbstractController
             return $this->redirectToRoute('musician_detail', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('pub/edit.html.twig', [
+        return $this->renderForm('musician/edit.html.twig', [
             'musician' => $musician,
-            'form' => $form,
+            'modifyProfileMusicianType' => $form,
         ]);
     }
 }
