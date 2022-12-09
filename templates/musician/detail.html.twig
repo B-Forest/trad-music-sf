@@ -7,23 +7,17 @@
 
 {% block body %}
     <section class="container">
-        <div style="display: flex; flex-direction: row; justify-content: space-between">
-            <h1>{{ musician.fullName }}</h1>
-            {% if musician.id == app.user.id %}
-                <a href="{{ path('musician_edit', {'id': musician.id}) }}">Edit Profile</a>
+        <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 3rem">
+            {% include 'musician/_card.html.twig' with {'musician' : musician} only %}
+            {% if app.user %}
+                {% if musician.id == app.user.id %}
+                    <a href="{{ path('musician_edit', {'id': musician.id}) }}">Edit Profile</a>
+                {% endif %}
             {% endif %}
+
         </div>
-        <img src="{{ asset('uploads/' ~ musician.image) }}" alt="{{ musician.fullName}}">
-        {% for instrument in musician.instruments %}
-            <ul>
-                <a href="{{ path('instrument_detail', { 'id' : instrument.id }) }}" class="badge badge-primary">
-                    {% if instrument.icon %}
-                        <i class="{{ instrument.icon }}"></i>
-                    {% endif %}
-                    {{ instrument.name }}
-                </a>
-            </ul>
-        {% endfor %}
+
+
 
         <h3>Futur Gig :</h3>
         {# Liens vers les futurs concerts auxquelles le musiciens va participer #}

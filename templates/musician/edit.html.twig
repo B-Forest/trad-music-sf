@@ -9,10 +9,12 @@
         <h1>Edit Your Profile</h1>
 
         {{ form_start(modifyProfileMusicianType) }}
-        {{ form_row(modifyProfileMusicianType.email) }}
         {{ form_row(modifyProfileMusicianType.firstName) }}
         {{ form_row(modifyProfileMusicianType.lastName) }}
+        {{ form_row(modifyProfileMusicianType.email) }}
+        {{ form_row(modifyProfileMusicianType.image) }}
         {{ form_row(modifyProfileMusicianType.instruments) }}
+
         <button type="submit" class="btn">Register</button>
         {{ form_end(modifyProfileMusicianType) }}
 

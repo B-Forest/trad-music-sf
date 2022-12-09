@@ -6,8 +6,10 @@ use App\Entity\Instrument;
 use App\Entity\Musician;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ModifyProfileMusicianType extends AbstractType
 {
@@ -23,6 +25,14 @@ class ModifyProfileMusicianType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
+            ->add('image', FileType::class, [
+                'attr' => ['accept' => 'image/*'],
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1058k',])
+                ]])
         ;
     }
 

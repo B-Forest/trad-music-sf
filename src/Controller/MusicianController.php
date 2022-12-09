@@ -7,6 +7,7 @@ use App\Form\ModifyProfileMusicianType;
 use App\Form\PubType;
 use App\Form\RegistrationMusicianFormType;
 use App\Repository\MusicianRepository;
+use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,12 +38,22 @@ class MusicianController extends AbstractController
 
     #[Route('musician/{id}/edit', name: 'musician_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_MUSICIAN')]
-    public function edit(Request $request, Musician $musician, MusicianRepository $musicianRepository): Response
+    public function edit(Request $request, Musician $musician,
+                         MusicianRepository $musicianRepository,
+                         FileUploader $fileUploader): Response
     {
+        $user =
         $form = $this->createForm(ModifyProfileMusicianType::class, $musician);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $fileName = $fileUploader ->upload($image);
+                $user->setImage($fileName);
+            }
+
+
             $musicianRepository->save($musician, true);
 
             return $this->redirectToRoute('musician_detail', [], Response::HTTP_SEE_OTHER);
