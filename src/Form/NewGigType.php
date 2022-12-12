@@ -5,12 +5,11 @@ namespace App\Form;
 use App\Entity\Gig;
 use App\Entity\Pub;
 use App\Repository\PubRepository;
-use PhpParser\Node\Name;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -37,8 +36,7 @@ class NewGigType extends AbstractType
                 ],
             ])
             ->add('dateEnd', DateTimeType::class, [
-                'input'  => 'datetime',
-                'widget' => 'choice',
+                'date_widget' => 'single_text',
                 'placeholder' => [
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                     'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
@@ -52,9 +50,13 @@ class NewGigType extends AbstractType
                             ->setParameter(':id', $user->getId());
                 },
                 'choice_label' => 'name',
-            ] )
+            ]);
 
-        ;
+            //->add('tags', CollectionType::class, [
+            //    'entry_type' => NewGigType::class,
+           //     'entry_options' => ['label' => false],
+           // ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -56,7 +56,7 @@ class PubController extends AbstractController
 
             $pubRepository->save($pub, true);
 
-            return $this->redirectToRoute('app_pub_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('pub_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('pub/new.html.twig', [

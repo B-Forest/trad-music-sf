@@ -19,6 +19,11 @@ class DefaultController extends AbstractController
         $users = $userRepository->findAll();
         $musicians = $musiciansRepository->findAll();
         $gigs = $gigRepository->findFutureGig();
+        $checkUser = $this->getUser();
+
+        if ($checkUser)
+            $currentUser = $checkUser;
+
 
         // appel le fichier de template twig avec la methode render
         return $this->render('default/homepage.html.twig',[
