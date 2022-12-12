@@ -10,7 +10,42 @@
     {{ form_row(newGigType.dateEnd) }}
     {{ form_row(newGigType.pub) }}
 
+    <h3>Tags</h3>
+    <ul class="participants" data-index="{{ newGigType.participants|length > 0 ? newGigType.participants|last.vars.name + 1 : 0 }}"
+        data-prototype="{{ form_widget(newGigType.participants.vars.prototype)|e('html_attr') }}">
+        {% for participant in newGigType.participants %}
+            <li>{{ form_row(participant.instrument) }}</li>
+        {% endfor %}
+    </ul>
+    <button type="button" class="add_item_link" data-collection-holder-class="participants">Add a participant</button>
+
     <button type="submit" class="btn">Register</button>
+    <script>
+
+        const addFormToCollection = (e) => {
+            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+            const item = document.createElement('li');
+
+            item.innerHTML = collectionHolder
+                .dataset
+                .prototype
+                .replace(
+                    /__name__/g,
+                    collectionHolder.dataset.index
+                );
+
+            collectionHolder.appendChild(item);
+
+            collectionHolder.dataset.index++;
+        };
+
+        document
+            .querySelectorAll('.add_item_link')
+            .forEach(btn => {
+                btn.addEventListener("click", addFormToCollection)
+            });
+    </script>
     {{ form_end(newGigType) }}
 </section>
 {% endblock %}

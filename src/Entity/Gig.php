@@ -26,7 +26,7 @@ class Gig
     #[ORM\JoinColumn(nullable: false)]
     private ?Pub $pub = null;
 
-    #[ORM\OneToMany(mappedBy: 'gig', targetEntity: Participant::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'gig', targetEntity: Participant::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $participants;
 
     public function __construct()

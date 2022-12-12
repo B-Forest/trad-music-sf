@@ -50,12 +50,12 @@ class GigRepository extends ServiceEntityRepository
             ->where('gig.dateStart > :today');
 
         if ($entity instanceof Pub) {
-            $qb->andWhere('pub.id = :id')
+            $qb->andWhere('pub.id = :pub_id')
             ->setParameter(':pub_id', $entity->getId());
         }
         elseif ($entity instanceof Musician) {
             $qb->join('gig.participants', 'participants')
-                ->andWhere('pub.id = :id')
+                ->andWhere('pub.id = :musician_id')
                 ->setParameter(':musician_id', $entity->getId());
         }
 

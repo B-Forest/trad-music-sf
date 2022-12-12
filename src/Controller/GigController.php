@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Gig;
+use App\Entity\Instrument;
 use App\Entity\Pub;
 use App\Form\NewGigType;
 use App\Repository\GigRepository;
+use App\Repository\InstrumentRepository;
 use App\Repository\PubRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,6 +42,10 @@ class GigController extends AbstractController
 
         //On vérifie si les données du formaulaire sont valides
         if ($form->isSubmitted() && $form->isValid() ){
+
+            foreach ($gig->getParticipants() as $participant) {
+                $participant->setGig($gig);
+            }
 
             $gigRepository->save($gig, true);
 

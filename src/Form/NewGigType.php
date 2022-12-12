@@ -50,12 +50,13 @@ class NewGigType extends AbstractType
                             ->setParameter(':id', $user->getId());
                 },
                 'choice_label' => 'name',
-            ]);
+            ])
 
-            //->add('tags', CollectionType::class, [
-            //    'entry_type' => NewGigType::class,
-           //     'entry_options' => ['label' => false],
-           // ]);
+            ->add('participants', CollectionType::class, [
+                'entry_type' => ParticipantType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+            ]);
 
     }
 
