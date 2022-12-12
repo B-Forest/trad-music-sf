@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Gig{% endblock %}
+
+{% block body %}
+<section class="container">
+    <h1>Create a New Gig</h1>
+    {{ form_start(newGigType) }}
+    {{ form_row(newGigType.dateStart) }}
+    {{ form_row(newGigType.dateEnd) }}
+    {{ form_row(newGigType.pub) }}
+
+    <button type="submit" class="btn">Register</button>
+    {{ form_end(newGigType) }}
+</section>
+{% endblock %}

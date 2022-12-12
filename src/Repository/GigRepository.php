@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Gig;
+use App\Entity\Musician;
 use App\Entity\Pub;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -40,7 +41,7 @@ class GigRepository extends ServiceEntityRepository
         }
     }
 
-    public function findFutureGig(Pub $pub = null, int $limit = 4  ): array
+    public function findFutureGig(Pub|Musician $entity = null, int $limit = 4  ): array
     {
         $qb = $this->createQueryBuilder('gig');
 
@@ -48,12 +49,38 @@ class GigRepository extends ServiceEntityRepository
             ->join('gig.pub', 'pub')
             ->where('gig.dateStart > :today');
 
-        if ($pub) {
+        if ($entity instanceof Pub) {
             $qb->andWhere('pub.id = :id')
-            ->setParameter(':id', $pub->getId());
+            ->setParameter(':pub_id', $entity->getId());
+        }
+        elseif ($entity instanceof Musician) {
+            $qb->join('gig.participants', 'participants')
+                ->andWhere('pub.id = :id')
+                ->setParameter(':musician_id', $entity->getId());
         }
 
         $qb->orderBy('gig.dateStart', 'ASC')
+            ->setMaxResults($limit)
+            ->setParameter(':today', new \DateTime());
+
+        //SELECT * FROM gig WHERE date_start > NOW() ORDER BY date-start ASC LIMIT 4
+        return  $qb->getQuery()->getResult();
+    }
+
+    public function findPastGig(Pub $pub = null, int $limit = 4  ): array
+    {
+        $qb = $this->createQueryBuilder('gig');
+
+        $qb->addSelect('pub')
+            ->join('gig.pub', 'pub')
+            ->where('gig.dateStart < :today');
+
+        if ($pub) {
+            $qb->andWhere('pub.id = :id')
+                ->setParameter(':id', $pub->getId());
+        }
+
+        $qb->orderBy('gig.dateStart', 'DESC')
             ->setMaxResults($limit)
             ->setParameter(':today', new \DateTime());
 

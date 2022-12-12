@@ -7,7 +7,7 @@
 
 {% block body %}
     <section class="container">
-        <h1>{{ gig.pub.name }}</h1>
+        <a href="{{ path('app_pub_show', { 'id' : gig.pub.id }) }}" style="text-decoration: none"><h1>{{ gig.pub.name }}</h1></a>
         <img src="{{ asset('uploads/' ~ gig.pub.image) }}" alt="{{gig.pub.name}}">
         <h3>Where and When :</h3>
             <p>{{ gig.pub.address ~ ' at ' ~ gig.pub.city ~ ' ' ~ gig.pub.zipCode }}</p>

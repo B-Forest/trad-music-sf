@@ -25,14 +25,14 @@ class ModifyProfileMusicianType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('image', FileType::class, [
-                'attr' => ['accept' => 'image/*'],
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1058k',])
-                ]])
+            //->add('imageFile', FileType::class, [
+            //    'attr' => ['accept' => 'image/*'],
+            //    'mapped' => false,
+            //    'required' => false,
+            //    'constraints' => [
+            //        new File(['maxSize' => '1058k',])
+            //    ]
+            //])
         ;
     }
 

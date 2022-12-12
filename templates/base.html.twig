@@ -42,7 +42,7 @@
                         {% elseif is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('admin') }}" style="text-decoration: none; margin-left: 10px">Admin</a>
                         {% else%}
-                            {{ app.user.email }}
+                            <a href="{{ path('app_manager_show', {'id' : app.user.id}) }}">{{ app.user.email }}</a>
                         {% endif %}
                     </li>
                 {%else%}

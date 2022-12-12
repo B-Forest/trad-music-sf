@@ -6,6 +6,7 @@ use App\Entity\Musician;
 use App\Form\ModifyProfileMusicianType;
 use App\Form\PubType;
 use App\Form\RegistrationMusicianFormType;
+use App\Repository\GigRepository;
 use App\Repository\MusicianRepository;
 use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -26,14 +27,17 @@ class MusicianController extends AbstractController
     }
 
     #[Route('/musician/{id}', name: 'musician_detail', requirements: ['id' => '\d+'])]
-    public function detail(int $id,MusicianRepository $musicianRepository): Response
+    public function detail(int $id,MusicianRepository $musicianRepository, GigRepository $gigRepository): Response
     {
         $musician = $musicianRepository->find($id);
         //Si le musicien n'existe pas en base de données on retourne une erreur 404
         if ($musician === null){
             return $this->createNotFoundException();
         }
-        return $this->render("musician/detail.html.twig", ['musician' => $musician]);
+        return $this->render("musician/detail.html.twig", [
+            'musician' => $musician,
+            'gig' => $gigRepository->findFutureGig()
+        ]);
     }
 
     #[Route('musician/{id}/edit', name: 'musician_edit', methods: ['GET', 'POST'])]
@@ -42,16 +46,15 @@ class MusicianController extends AbstractController
                          MusicianRepository $musicianRepository,
                          FileUploader $fileUploader): Response
     {
-        $user =
         $form = $this->createForm(ModifyProfileMusicianType::class, $musician);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
-            if ($image) {
-                $fileName = $fileUploader ->upload($image);
-                $user->setImage($fileName);
-            }
+            ////$image = $form->get('imageFile')->getData();
+            //if ($image) {
+            //    $fileName = $fileUploader ->upload($image);
+           //     $musician->setImage($fileName);
+           // }
 
 
             $musicianRepository->save($musician, true);

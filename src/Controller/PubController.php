@@ -70,7 +70,8 @@ class PubController extends AbstractController
     {
         return $this->render('pub/show.html.twig', [
             'pub' => $pub,
-            'gigs'=> $gig->findFutureGig($pub),
+            'gigsfuture'=> $gig->findFutureGig($pub),
+            'gigspast' => $gig->findPastGig($pub),
 
         ]);
     }

@@ -12,18 +12,36 @@
 
         <div class="card">
             <ul>
-                    {% for gig in gigs %}
+                    {% for gig in gigsfuture %}
                     <li>
-                        <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
+                        <a href="{{ path('gig_detail', {'id': gig.id}) }}">
+                            <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
                             {{ gig.dateStart|date('l jS \\o\\f F  \\a\\t g:i a') }}
-                        </time>
+                            </time>
+                        </a>
                     </li>
                     {% endfor %}
             </ul>
         </div>
 
+        <h2>Past Gigs</h2>
+        <div class="card">
+            <ul>
+                {% for gig in gigspast %}
+                    <li>
+                        <a href="{{ path('gig_detail', {'id': gig.id}) }}">
+                            <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
+                                {{ gig.dateStart|date('l jS \\o\\f F  \\a\\t g:i a') }}
+                            </time>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <a href="{{ path('pub_list') }}" class="badge badge-primary">back to list</a>
+
+
+        <a href="{{ path('pub_list') }}" class="badge badge-primary">back to list</a>
         {% if is_granted('ROLE_MANAGER') %}
             <a href="{{ path('app_pub_edit', {'id': pub.id}) }}">edit</a>
 

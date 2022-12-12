@@ -6,11 +6,21 @@
 
     <section class="container">
 
-        <h2>Gigs list</h2>
+        <h2>Future Gigs</h2>
 
         <div class="grid">
 
-            {% for gig in gigs %}
+            {% for gig in gigsfuture %}
+                {% include 'gig/_card.html.twig' with {'gig' : gig} only %}
+            {% endfor %}
+
+        </div>
+
+        <h2>Past Gigs</h2>
+
+        <div class="grid">
+
+            {% for gig in gigspast %}
                 {% include 'gig/_card.html.twig' with {'gig' : gig} only %}
             {% endfor %}
 

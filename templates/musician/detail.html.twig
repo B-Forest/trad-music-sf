@@ -11,7 +11,7 @@
             {% include 'musician/_card.html.twig' with {'musician' : musician} only %}
             {% if app.user %}
                 {% if musician.id == app.user.id %}
-                    <a href="{{ path('musician_edit', {'id': musician.id}) }}">Edit Profile</a>
+                    <a href="{{ path('musician_edit', {'id': musician.id}) }}" class="badge badge-primary">Edit Profile</a>
                 {% endif %}
             {% endif %}
 
