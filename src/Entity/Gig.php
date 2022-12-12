@@ -85,6 +85,7 @@ class Gig
 
     public function addParticipant(Participant $participant): self
     {
+        //c'est de la bidouille
         if (!$this->participants->contains($participant)) {
             $this->participants->add($participant);
             $participant->setGig($this);
