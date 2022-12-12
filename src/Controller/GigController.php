@@ -22,8 +22,8 @@ class GigController extends AbstractController
     {
         return $this->render('gig/index.html.twig', [
             'gigs' => $gigRepository->findAll(),
-            'gigsfuture'=> $gigRepository->findFutureGig(),
-            'gigspast' => $gigRepository->findPastGig(),
+            'gigsfuture'=> $gigRepository->findFutureGig(null, 999),
+            'gigspast' => $gigRepository->findPastGig(null,999),
         ]);
     }
 
