@@ -10,17 +10,19 @@
         {# Générer la balise <form> #}
         {{ form_start(form) }}
 
-            {# Décomposer l'afffichage du formulaire #}
-            <div class="form-row">
-                {{ form_label(form.name) }}
-                {{ form_widget(form.name) }}
-                {{ form_errors(form.name) }}
-            </div>
+        {# Décomposer l'afffichage du formulaire #}
+        <div class="form-row">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
 
-            {# Génére l'ensemble des champs du formulaire #}
-            {{ form_widget(form) }}
+        {# Génére l'ensemble des champs du formulaire #}
+        {{ form_widget(form) }}
 
-            <button type="submit">Create</button>
+        <input type="hidden" name="instrument_list" value="{{ path('instrument_list') }}">
+        <button type="submit">Create</button>
+
 
         {# Générer la balise </form> #}
         {{ form_end(form) }}

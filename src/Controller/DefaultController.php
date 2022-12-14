@@ -36,7 +36,6 @@ class DefaultController extends AbstractController
     #[Route('/about', name: 'about')]
     public function about(): Response
     {
-
         return $this->render('default/about.html.twig', [
         ]);
     }

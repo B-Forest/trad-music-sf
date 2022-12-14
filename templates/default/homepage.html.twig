@@ -17,7 +17,7 @@
         {% for musician in musicians %}
             {% include 'musician/_card.html.twig' with {'musician' : musician} only %}
         {% endfor %}
-
+        <div style="display:flex; justify-content:center; align-items:center"><a href="{{ path('musician_list') }}" class="btn btn-primary" style="">See more</a></div>
     </div>
     </section>
 {% endblock %}

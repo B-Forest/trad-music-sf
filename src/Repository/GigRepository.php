@@ -67,7 +67,7 @@ class GigRepository extends ServiceEntityRepository
         return  $qb->getQuery()->getResult();
     }
 
-    public function findPastGig(Pub $pub = null, int $limit = 4  ): array
+    public function findPastGig(Pub|Musician $entity = null, int $limit = 4  ): array
     {
         $qb = $this->createQueryBuilder('gig');
 
@@ -75,9 +75,14 @@ class GigRepository extends ServiceEntityRepository
             ->join('gig.pub', 'pub')
             ->where('gig.dateStart < :today');
 
-        if ($pub) {
+        if ($entity instanceof Pub) {
             $qb->andWhere('pub.id = :id')
-                ->setParameter(':id', $pub->getId());
+                ->setParameter(':id', $entity->getId());
+        }
+        elseif ($entity instanceof Musician) {
+            $qb->join('gig.participants', 'participants')
+                ->andWhere('pub.id = :musician_id')
+                ->setParameter(':musician_id', $entity->getId());
         }
 
         $qb->orderBy('gig.dateStart', 'DESC')

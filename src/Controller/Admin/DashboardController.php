@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Instrument;
 use App\Entity\Manager;
 use App\Entity\Pub;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -46,6 +47,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Pubs', 'fas fa-list', Pub::class);
         yield MenuItem::linkToCrud('Managers', 'fas fa-list', Manager::class);
+        yield MenuItem::linkToCrud('Instruments', 'fas fa-list', Instrument::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

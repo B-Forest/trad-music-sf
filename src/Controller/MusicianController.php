@@ -36,7 +36,8 @@ class MusicianController extends AbstractController
         }
         return $this->render("musician/detail.html.twig", [
             'musician' => $musician,
-            'gig' => $gigRepository->findFutureGig()
+            'gig' => $gigRepository->findFutureGig($musician),
+            'gigpast' => $gigRepository->findPastGig($musician),
         ]);
     }
 

@@ -29,6 +29,16 @@
             </ul>
         {% endfor %}
 
+        {#  <h3>Past Gig :</h3>
+
+        {% for participant in musician.participants %}
+            <ul>
+                <li>
+                    <a href="{{ path('gig_detail', {'id' : participant.gig.id}) }}">{{ participant.gigpast.pub.name}} {{ participant.gigpast.dateStart|date('Y F l g:i a')}} </a>
+                </li>
+            </ul>
+
+        {% endfor %}#}
 
     </section>
 {% endblock %}

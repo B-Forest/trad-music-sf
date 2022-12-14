@@ -61,8 +61,15 @@
 
 <footer class="site-footer">
     <div class="container">
+        <div style="display: flex; justify-content: space-between">
+        <div>
         <p>Trad Music &copy; 2022</p>
         {{ render(controller('App\\Controller\\InstrumentController::listInstruments')) }}
+        </div>
+        <div style="display: flex; align-items: center">
+            <a href="{{ path('homepage') }}" class="badge badge-primary">Home</a>
+        </div>
+        </div>
     </div>
 </footer>
 </body>
