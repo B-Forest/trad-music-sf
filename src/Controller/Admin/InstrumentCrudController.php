@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Instrument;
-use App\Entity\Pub;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
