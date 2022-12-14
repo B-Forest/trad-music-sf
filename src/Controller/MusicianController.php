@@ -60,7 +60,7 @@ class MusicianController extends AbstractController
 
             $musicianRepository->save($musician, true);
 
-            return $this->redirectToRoute('musician_detail', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('musician_detail', ['id' => $musician->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('musician/edit.html.twig', [
