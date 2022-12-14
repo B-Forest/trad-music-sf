@@ -7,13 +7,14 @@
 
 {% block body %}
     <section class="container">
-        <a href="{{ path('app_pub_show', { 'id' : gig.pub.id }) }}" style="text-decoration: none"><h1>{{ gig.pub.name }}</h1></a>
-        <img src="{{ asset('uploads/' ~ gig.pub.image) }}" alt="{{gig.pub.name}}">
+        <a href="{{ path('app_pub_show', { 'id' : gig.pub.id }) }}" style="text-decoration: none">
+            <h1>{{ gig.pub.name }}</h1></a>
+        <img src="{{ asset('uploads/' ~ gig.pub.image) }}" alt="{{ gig.pub.name }}">
         <h3>Where and When :</h3>
-            <p>{{ gig.pub.address ~ ' at ' ~ gig.pub.city ~ ' ' ~ gig.pub.zipCode }}</p>
-            <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
-            {{ gig.dateStart|date('l jS \\o\\f F  \\a\\t g:i a')}}
-            </time>
+        <p>{{ gig.pub.address ~ ' at ' ~ gig.pub.city ~ ' ' ~ gig.pub.zipCode }}</p>
+        <time datetime="{{ gig.dateStart|date('Y-m-d h:i') }}">
+            {{ gig.dateStart|date('l jS \\o\\f F  \\a\\t g:i a') }}
+        </time>
 
         <h2>Partipants :</h2>
         {% for participant in gig.participants %}
@@ -23,12 +24,13 @@
                     {% if participant.musician %}
                         {# un lien pour pouvoir aller depuis la âge détail gig sur la page détail musician #}
                         <a href="{{ path('musician_detail', {'id': participant.musician.id}) }}">{{ participant.musician.fullName }}</a>
-                    {% else%}
-                        Aucun participant
+                    {% else %}
+                        <p>No participant</p>
+                        <a class="btn btn-primary" href="{{ path('gig_add_participant', {'gigInstrumentId': participant.instrument.id, 'id':gig.id}) }}">Add Participant</a>
                     {% endif %}
                 </li>
             </ul>
         {% endfor %}
-            
+
     </section>
 {% endblock %}
