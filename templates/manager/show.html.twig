@@ -7,11 +7,11 @@
     <h1>Manager</h1>
         <h3> Email : {{ manager.email }}</h3>
 
-        <ul>
+        <div class="grid">
         {% for pub in manager.pubs %}
             {{ include('pub/_card.html.twig') }}
         {% endfor %}
-        </ul>
+        </div>
         <a href="{{ path('app_pub_new') }}" class="badge badge-primary">Create a new pub</a>
         <a href="{{ path('app_gig_new') }}" class="badge badge-primary">Create a Gig</a>
 

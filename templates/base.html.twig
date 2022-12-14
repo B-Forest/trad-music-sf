@@ -38,11 +38,11 @@
                             Logout
                         </a>
                         {% if is_granted('ROLE_MUSICIAN') %}
-                            <a href="{{ path('musician_detail', {'id': app.user.id}) }}"style="text-decoration: none; margin-left: 10px; text-transform: capitalize;">{{ app.user.fullName }}</a>
+                            <a href="{{ path('musician_detail', {'id': app.user.id}) }}" style="text-decoration: none; margin-left: 10px; text-transform: capitalize;">{{ app.user.fullName }}</a>
                         {% elseif is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('admin') }}" style="text-decoration: none; margin-left: 10px">Admin</a>
                         {% else%}
-                            <a href="{{ path('app_manager_show', {'id' : app.user.id}) }}">{{ app.user.email }}</a>
+                            <a href="{{ path('app_manager_show', {'id' : app.user.id}) }}" style="text-decoration: none; margin-left: 10px;">{{ app.user.email }}</a>
                         {% endif %}
                     </li>
                 {%else%}
