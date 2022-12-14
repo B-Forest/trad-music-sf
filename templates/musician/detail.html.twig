@@ -8,12 +8,15 @@
 {% block body %}
     <section class="container">
         <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 3rem">
-            {% include 'musician/_card.html.twig' with {'musician' : musician} only %}
+            <div>{% include 'musician/_card.html.twig' with {'musician' : musician} only %}
+            </div>
+            <div style="display:flex; justify-content:center; align-items:flex-start">
             {% if app.user %}
                 {% if musician.id == app.user.id %}
                     <a href="{{ path('musician_edit', {'id': musician.id}) }}" class="badge badge-primary">Edit Profile</a>
                 {% endif %}
             {% endif %}
+            </div>
 
         </div>
 
