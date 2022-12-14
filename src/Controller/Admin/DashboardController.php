@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Gig;
 use App\Entity\Instrument;
 use App\Entity\Manager;
+use App\Entity\Musician;
 use App\Entity\Pub;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -50,6 +51,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Managers', 'fas fa-list', Manager::class);
         yield MenuItem::linkToCrud('Instruments', 'fas fa-list', Instrument::class);
         yield MenuItem::linkToCrud('Gigs', 'fas fa-list', Gig::class);
+        yield MenuItem::linkToCrud('Musicians', 'fas fa-list', Musician::class);
         yield MenuItem::linkToRoute('Trad Music', 'fa-solid fa-music', 'homepage');
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
